@@ -1,35 +1,32 @@
 const fs = require("fs");
 const input = fs.readFileSync("/dev/stdin", "utf8").trim().split("\n");
 
-// 결과를 저장할 배열
 const results = [];
 
-input.forEach((line) => {
-  if (line === ".") return;
+for (let line of input) {
+  if (line === ".") break;
+
   const stack = [];
-  let balanced = true;
+  let isPair = true;
 
   for (const char of line) {
     if (char === "(" || char === "[") {
       stack.push(char);
     } else if (char === ")") {
-      if (stack.pop() !== "(") {
-        balanced = false;
+      if (stack.length === 0 || stack.pop() !== "(") {
+        isPair = false;
         break;
       }
     } else if (char === "]") {
-      if (stack.pop() !== "[") {
-        balanced = false;
+      if (stack.length === 0 || stack.pop() !== "[") {
+        isPair = false;
         break;
       }
     }
   }
 
-  if (balanced && stack.length === 0) {
-    results.push("yes");
-  } else {
-    results.push("no");
-  }
-});
+  // 괄호 짝이 맞고, 스택이 비어 있어야 "yes"를 결과에 추가
+  results.push(isPair && stack.length === 0 ? "yes" : "no");
+}
 
 console.log(results.join("\n"));
