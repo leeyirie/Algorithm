@@ -2,7 +2,7 @@ const fs = require("fs");
 const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
 const N = parseInt(input[0]);
 const board = input.slice(1).map((line) => line.split(" ").map(Number));
-
+//[ [ 2, 2, 1 ], [ 2, 2, 2 ], [ 1, 2, -1 ] ]
 
 const visited = Array.from({ length: N }, () => Array(N).fill(false));
 
