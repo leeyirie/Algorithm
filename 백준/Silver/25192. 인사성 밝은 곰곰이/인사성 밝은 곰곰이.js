@@ -4,7 +4,7 @@ const N = parseInt(input[0]);
 const list = input.slice(1);
 
 let count = 0; 
-let chat = new Set(); 
+let chat = new Map(); 
 
 
 for (let id of list) {
@@ -13,7 +13,7 @@ for (let id of list) {
   } else {
     if (!chat.has(id)) {
       count++;
-      chat.add(id); 
+      chat.set(id); 
     }
   }
 }
