@@ -1,23 +1,21 @@
 const fs = require('fs');
 const [N, M] = fs.readFileSync('/dev/stdin', 'utf8').trim().split(' ').map(Number);
 
-function generateSequences(N, M) {
+function list(N, M) {
   const results = [];
   
-  function backtrack(start = 1, sequence = []) {
-    if (sequence.length === M) {
-      results.push(sequence.join(' '));
+  function backtrack(n = 1, arr = []) {
+    if (arr.length === M) {
+      results.push(arr.join(' '));
       return;
     }
 
-    for (let i = start; i <= N; i++) {
-      backtrack(i + 1, [...sequence, i]);
+    for (let i = n; i <= N; i++) {
+      backtrack(i + 1, [...arr, i]);
     }
   }
   
   backtrack();
   return results.join('\n');
 }
-
-const result = generateSequences(N, M);
-console.log(result);
+console.log(list(N, M));
